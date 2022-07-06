@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline/bloc_provider.dart';
@@ -80,9 +79,8 @@ class FavoritesPage extends StatelessWidget {
                           Container(
                               width: 128.0,
                               height: 114.0,
-                              margin: EdgeInsets.only(bottom: 30),
-                              child: FlareActor("assets/Broken Heart.flr",
-                                  animation: "Heart Break", shouldClip: false)),
+                              margin: EdgeInsets.only(bottom: 30)
+                          ),
                           Container(
                             padding: EdgeInsets.only(bottom: 21),
                             width: 250,

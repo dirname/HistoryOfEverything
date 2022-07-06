@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -317,17 +316,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                           height: 60.0,
                                           width: 60.0,
                                           padding: EdgeInsets.all(18.0),
-                                          color: Colors.white.withOpacity(0.0),
-                                          child: FlareActor(
-                                              "assets/heart_toolbar.flr",
-                                              animation:
-                                                  _showFavorites ? "On" : "Off",
-                                              shouldClip: false,
-                                              color: _headerTextColor != null
-                                                  ? _headerTextColor
-                                                  : darkText.withOpacity(
-                                                      darkText.opacity * 0.75),
-                                              alignment: Alignment.centerRight),
+                                          color: Colors.white.withOpacity(0.0)
                                         )),
                                     onTap: () {
                                       timeline.showFavorites =

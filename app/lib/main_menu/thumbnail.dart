@@ -22,13 +22,7 @@ class ThumbnailWidget extends StatelessWidget {
     /// Check if the [entry.asset] provided is already a [TimelineImage].
     if (asset is TimelineImage) {
       thumbnail = RawImage(image: asset.image);
-    } else if (asset is TimelineNima || asset is TimelineFlare) {
-      /// If not, retrieve the image from the Nima/Flare [TimelineAsset], and set it as inactive (i.e. a static image).
-      thumbnail = TimelineEntryWidget(
-        isActive: false,
-        timelineEntry: entry,
-      );
-    } else {
+    }  else {
       thumbnail = Container(
         color: Colors.transparent,
       );

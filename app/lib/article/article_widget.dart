@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
@@ -208,12 +207,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
 
                                           /// Check out the widget at:
                                           /// https://www.2dimensions.com/a/pollux/files/flare/heart-simple/preview
-                                          child: FlareActor(
-                                              "assets/Favorite.flr",
-                                              animation: isFav
-                                                  ? "Favorite"
-                                                  : "Unfavorite",
-                                              shouldClip: false),
+                                          
                                         )),
                                     onTap: () {
                                       setState(() {

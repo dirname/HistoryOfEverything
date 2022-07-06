@@ -1,14 +1,6 @@
 import 'dart:ui' as ui;
 import 'dart:ui';
 
-import 'package:flare_flutter/flare.dart' as flare;
-import 'package:flare_dart/animation/actor_animation.dart' as flare;
-import 'package:flare_dart/math/aabb.dart' as flare;
-import 'package:flare_dart/math/vec2d.dart' as flare;
-import 'package:nima/nima.dart' as nima;
-import 'package:nima/nima/animation/actor_animation.dart' as nima;
-import 'package:nima/nima/math/aabb.dart' as nima;
-
 /// An object representing the renderable assets loaded from `timeline.json`.
 ///
 /// Each [TimelineAsset] encapsulates all the relevant properties for drawing,
@@ -38,30 +30,6 @@ class TimelineAnimatedAsset extends TimelineAsset {
   double gap = 0.0;
 }
 
-/// An `Nima` Asset.
-class TimelineNima extends TimelineAnimatedAsset {
-  nima.FlutterActor actorStatic;
-  nima.FlutterActor actor;
-  nima.ActorAnimation animation;
-  nima.AABB setupAABB;
-}
-
-/// A `Flare` Asset.
-class TimelineFlare extends TimelineAnimatedAsset {
-  flare.FlutterActorArtboard actorStatic;
-  flare.FlutterActorArtboard actor;
-  flare.ActorAnimation animation;
-
-  /// Some Flare assets will have multiple idle animations (e.g. 'Humans'),
-  /// others will have an intro&idle animation (e.g. 'Sun is Born').
-  /// All this information is in `timeline.json` file, and it's de-serialized in the
-  /// [Timeline.loadFromBundle()] method, called during startup.
-  /// and custom-computed AABB bounds to properly position them in the timeline.
-  flare.ActorAnimation intro;
-  flare.ActorAnimation idle;
-  List<flare.ActorAnimation> idleAnimations;
-  flare.AABB setupAABB;
-}
 
 /// A label for [TimelineEntry].
 enum TimelineEntryType { Era, Incident }
