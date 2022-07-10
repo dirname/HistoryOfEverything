@@ -419,6 +419,9 @@ class Timeline {
           TimelineAsset asset;
           Map assetMap = map["asset"] as Map;
           String source = assetMap["source"];
+          // only use image
+          source = "photo-test.jpg";
+          
           String filename = "assets/" + source;
           String extension = getExtension(source);
 
