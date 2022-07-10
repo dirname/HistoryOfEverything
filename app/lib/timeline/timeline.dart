@@ -421,7 +421,7 @@ class Timeline {
           String source = assetMap["source"];
           // only use image
           source = "photo-test.jpg";
-          
+
           String filename = "assets/" + source;
           String extension = getExtension(source);
 
@@ -570,6 +570,7 @@ class Timeline {
     }
   }
 
+  //CHKME when viewpoint changed, set start and end year
   /// This method bounds the current viewport depending on the current start and end positions.
   void setViewport(
       {double start = double.maxFinite,
@@ -710,6 +711,7 @@ class Timeline {
         : _headerColors.last;
   }
 
+  //CHKME this function will be called when viewport change to filter the events and and show events in the current window
   bool advance(double elapsed, bool animate) {
     if (_height <= 0) {
       /// Done rendering. Need to wait for height.

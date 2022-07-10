@@ -149,6 +149,7 @@ class TimelineRenderObject extends RenderBox {
       return;
     }
 
+    //CHKME select focusItem from the main menu, timeline.setViewport(_focusItem.start & focusItem.end)
     /// Adjust the current timeline padding and consequentely the viewport.
     if (_focusItem.pad) {
       timeline.padding = EdgeInsets.only(

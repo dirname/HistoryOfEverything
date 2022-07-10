@@ -24,6 +24,9 @@ class BlocProvider extends InheritedWidget {
       : timeline = t ?? Timeline(platform),
         favoritesBloc = fb ?? FavoritesBloc(),
         super(key: key, child: child) {
+          
+          //CHKME load timeline data, loadFromBundle can be called in any time when scrolling/scale the timeline
+          //TODO we need to load the timeline data/event dynamically for video player 
     timeline
         .loadFromBundle("assets/timeline.json")
         .then((List<TimelineEntry> entries) {

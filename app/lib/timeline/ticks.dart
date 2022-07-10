@@ -16,10 +16,10 @@ class Ticks {
   static const double Width = 40.0;
   static const double LabelPadLeft = 5.0;
   static const double LabelPadRight = 1.0;
-  static const int TickDistance = 4;
-  static const int TextTickDistance = 40;
+  static const int TickDistance = 4; //CHKME unit years
+  static const int TextTickDistance = 40;//CHKME unit years, show TextTick every 10 Tick (TextTickDistance = TickDistance * 10)
   static const double TickSize = 20.0;
-  static const double MiddleTickSize = 10.0;
+  static const double MiddleTickSize = 10.0; //CHKME add one MiddleTick in the middle (ttt % (textTickDistance/2) == 0)
   static const double SmallTickSize = 5.0;
 
   /// Other than providing the [PaintingContext] to allow the ticks to paint themselves,
@@ -28,6 +28,9 @@ class Ticks {
   void paint(PaintingContext context, Offset offset, double translation,
       double scale, double height, Timeline timeline) {
     final Canvas canvas = context.canvas;
+
+    //debugPrint("height -> " + height.toString()); //CHKME 730 pixels - the height of window
+    //debugPrint("scale -> " + scale.toString()); //CHKME  scale = size.height(730) / (renderEnd(1955) - renderStart(1930));
 
     double bottom = height;
     double tickDistance = TickDistance.toDouble();
@@ -58,6 +61,9 @@ class Ticks {
     if (scaledTickDistance > TextTickDistance) {
       textTickDistance = tickDistance;
     }
+
+    //debugPrint("scaledTickDistance -> " + scaledTickDistance.toString());//CHKME pixels of the height of min tick distance
+    //debugPrint("numTicks -> " + numTicks.toString()); //CHKME draw how many tickets
 
     /// Figure out the position of the top left corner of the screen
     double tickOffset = 0.0;
@@ -119,6 +125,8 @@ class Ticks {
           Paint()..color = Color.fromRGBO(246, 246, 246, 0.95));
     }
 
+    //CHKME add a guilde line to show date time for current video
+    //TODO print date time label in the top right of the timeline
     canvas.drawRect(
             Rect.fromLTWH(offset.dx + gutterWidth + TickSize,
                 200, TickSize * 10, 1.0),
