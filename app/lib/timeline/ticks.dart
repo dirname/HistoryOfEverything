@@ -16,9 +16,10 @@ class Ticks {
   static const double Width = 40.0;
   static const double LabelPadLeft = 5.0;
   static const double LabelPadRight = 1.0;
-  static const int TickDistance = 16;
-  static const int TextTickDistance = 64;
-  static const double TickSize = 15.0;
+  static const int TickDistance = 4;
+  static const int TextTickDistance = 40;
+  static const double TickSize = 20.0;
+  static const double MiddleTickSize = 10.0;
   static const double SmallTickSize = 5.0;
 
   /// Other than providing the [PaintingContext] to allow the ticks to paint themselves,
@@ -118,6 +119,11 @@ class Ticks {
           Paint()..color = Color.fromRGBO(246, 246, 246, 0.95));
     }
 
+    canvas.drawRect(
+            Rect.fromLTWH(offset.dx + gutterWidth + TickSize,
+                200, TickSize * 10, 1.0),
+            Paint()..color = Color.fromARGB(255, 255, 0, 0));
+
     Set<String> usedValues = Set<String>();
 
     /// Draw all the ticks.
@@ -165,11 +171,18 @@ class Ticks {
             Offset(offset.dx + LabelPadLeft - LabelPadRight,
                 offset.dy + height - o - tickParagraph.height - 5));
       } else {
-        /// If we're within two text-ticks, just draw a smaller line.
-        canvas.drawRect(
-            Rect.fromLTWH(offset.dx + gutterWidth - SmallTickSize,
-                offset.dy + height - o, SmallTickSize, 1.0),
-            Paint()..color = colors.short);
+        if (tt % (textTickDistance/2) == 0) {
+            canvas.drawRect(
+              Rect.fromLTWH(offset.dx + gutterWidth - MiddleTickSize,
+                  offset.dy + height - o, MiddleTickSize, 1.0),
+              Paint()..color = colors.short);
+         } else {
+          /// If we're within two text-ticks, just draw a smaller line.
+          canvas.drawRect(
+              Rect.fromLTWH(offset.dx + gutterWidth - SmallTickSize,
+                  offset.dy + height - o, SmallTickSize, 1.0),
+              Paint()..color = colors.short);
+         }
       }
       startingTickMarkValue += tickDistance;
     }
