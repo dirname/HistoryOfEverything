@@ -125,8 +125,8 @@ class Ticks {
           Paint()..color = Color.fromRGBO(246, 246, 246, 0.95));
     }
 
-    //CHKME add a guilde line to show date time for current video
-    //TODO print date time label in the top right of the timeline
+    //CHKME add a guild line to show date time for current video
+    //TODO print the year text in the guild line in the top right of the timeline
     canvas.drawRect(
             Rect.fromLTWH(offset.dx + gutterWidth + TickSize,
                 200, TickSize * 10, 1.0),
