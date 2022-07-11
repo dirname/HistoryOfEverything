@@ -419,6 +419,7 @@ class Timeline {
           TimelineAsset asset;
           Map assetMap = map["asset"] as Map;
           String source = assetMap["source"];
+          //CHKME use one jpg image to replace the flr and nma files in the timeline.json file
           // only use image
           source = "photo-test.jpg";
 
