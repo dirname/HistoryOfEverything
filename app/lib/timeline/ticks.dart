@@ -17,9 +17,11 @@ class Ticks {
   static const double LabelPadLeft = 5.0;
   static const double LabelPadRight = 1.0;
   static const int TickDistance = 4; //CHKME unit years
-  static const int TextTickDistance = 40;//CHKME unit years, show TextTick every 10 Tick (TextTickDistance = TickDistance * 10)
+  static const int TextTickDistance =
+      40; //CHKME unit years, show TextTick every 10 Tick (TextTickDistance = TickDistance * 10)
   static const double TickSize = 20.0;
-  static const double MiddleTickSize = 10.0; //CHKME add one MiddleTick in the middle (ttt % (textTickDistance/2) == 0)
+  static const double MiddleTickSize =
+      10.0; //CHKME add one MiddleTick in the middle (ttt % (textTickDistance/2) == 0)
   static const double SmallTickSize = 5.0;
 
   /// Other than providing the [PaintingContext] to allow the ticks to paint themselves,
@@ -125,12 +127,47 @@ class Ticks {
           Paint()..color = Color.fromRGBO(246, 246, 246, 0.95));
     }
 
+    // text field text style
+    const textFieldTextStyle = TextStyle(
+      color: Colors.black,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    );
+
     //CHKME add a guild line to show date time for current video
     //TODO print the year text in the guild line in the top right of the timeline
+    // canvas.drawRect(
+    //         Rect.fromLTWH(offset.dx + gutterWidth + TickSize,
+    //             200, TickSize * 10, 1.0),
+    //         Paint()
+    //           ..color = Color.fromARGB(255, 255, 0, 0)
+    //     ..style=PaintingStyle.stroke);
+    //test here
     canvas.drawRect(
-            Rect.fromLTWH(offset.dx + gutterWidth + TickSize,
-                200, TickSize * 10, 1.0),
-            Paint()..color = Color.fromARGB(255, 255, 0, 0));
+        Rect.fromLTWH(
+            offset.dx + gutterWidth + TickSize + 300, 100, TickSize * 3, 20.0),
+        Paint()
+          ..color = Color.fromARGB(255, 94, 77, 77)
+          ..strokeWidth = 25
+          ..style = PaintingStyle.stroke);
+
+    int o = tickOffset.floor();
+    TickColors colors = timeline.findTickColors(offset.dy + height - o);
+
+    /// Drawing text to [canvas] is done by using the [ParagraphBuilder] directly.
+    ui.ParagraphBuilder builder = ui.ParagraphBuilder(ui.ParagraphStyle(
+        textAlign: TextAlign.end, fontFamily: "Roboto", fontSize: 20.0))
+      ..pushStyle(ui.TextStyle(color: Colors.yellow));
+
+    String year = "2022";
+    builder.addText(year);
+    ui.Paragraph labelYear = builder.build();
+    labelYear.layout(ui.ParagraphConstraints(width: 50));
+
+    canvas.drawParagraph(
+      labelYear,
+      Offset(offset.dx + gutterWidth + TickSize + 300, 100),
+    );
 
     Set<String> usedValues = Set<String>();
 
@@ -179,18 +216,18 @@ class Ticks {
             Offset(offset.dx + LabelPadLeft - LabelPadRight,
                 offset.dy + height - o - tickParagraph.height - 5));
       } else {
-        if (tt % (textTickDistance/2) == 0) {
-            canvas.drawRect(
+        if (tt % (textTickDistance / 2) == 0) {
+          canvas.drawRect(
               Rect.fromLTWH(offset.dx + gutterWidth - MiddleTickSize,
                   offset.dy + height - o, MiddleTickSize, 1.0),
               Paint()..color = colors.short);
-         } else {
+        } else {
           /// If we're within two text-ticks, just draw a smaller line.
           canvas.drawRect(
               Rect.fromLTWH(offset.dx + gutterWidth - SmallTickSize,
                   offset.dy + height - o, SmallTickSize, 1.0),
               Paint()..color = colors.short);
-         }
+        }
       }
       startingTickMarkValue += tickDistance;
     }
